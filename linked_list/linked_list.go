@@ -49,3 +49,28 @@ func (ll *LinkedList) Print() string {
 
 	return strings.Join(list, " -> ")
 }
+
+func (ll *LinkedList) Pop() string {
+	if ll.length == 0 {
+		return ""
+	}
+
+	currentNode := ll.head
+	if ll.length == 1 {
+		ll.head = nil
+		ll.tail = nil
+		ll.length--
+		return currentNode.value
+	}
+
+	for currentNode.nextNode.nextNode != nil {
+		currentNode = currentNode.nextNode
+	}
+
+	value := currentNode.nextNode.value
+	currentNode.nextNode = nil
+	ll.tail = currentNode
+	ll.length--
+
+	return value
+}
