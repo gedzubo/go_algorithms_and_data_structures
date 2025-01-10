@@ -42,3 +42,47 @@ func TestPop(t *testing.T) {
 		}
 	})
 }
+
+func TestUnshift(t *testing.T) {
+	ll := NewLinkedList("B")
+	ll.Unshift("A")
+
+	want := "A -> B"
+	got := ll.Print()
+
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
+}
+
+func TestShift(t *testing.T) {
+	t.Run("Returns correct node value", func(t *testing.T) {
+		ll := NewLinkedList("A")
+		ll.Push("B")
+		ll.Push("C")
+		ll.Push("D")
+
+		want := "A"
+		got := ll.Shift()
+
+		if got != want {
+			t.Errorf("got %q, want %q", got, want)
+		}
+	})
+
+	t.Run("Updates the list correctly", func(t *testing.T) {
+		ll := NewLinkedList("A")
+		ll.Push("B")
+		ll.Push("C")
+		ll.Push("D")
+
+		ll.Shift()
+
+		want := "B -> C -> D"
+		got := ll.Print()
+
+		if got != want {
+			t.Errorf("got %q, want %q", got, want)
+		}
+	})
+}

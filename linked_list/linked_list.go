@@ -18,24 +18,13 @@ func NewLinkedList(initialValue string) *LinkedList {
 			length: 0,
 		}
 	} else {
+		newNode := &Node{value: initialValue}
 		return &LinkedList{
-			head:   &Node{value: initialValue},
-			tail:   &Node{value: initialValue},
+			head:   newNode,
+			tail:   newNode,
 			length: 1,
 		}
 	}
-}
-
-func (ll *LinkedList) Push(value string) {
-	newNode := &Node{value: value}
-	if ll.length == 0 {
-		ll.head = newNode
-		ll.tail = newNode
-	} else {
-		ll.tail.nextNode = newNode
-		ll.tail = newNode
-	}
-	ll.length++
 }
 
 func (ll *LinkedList) Print() string {
@@ -48,6 +37,18 @@ func (ll *LinkedList) Print() string {
 	}
 
 	return strings.Join(list, " -> ")
+}
+
+func (ll *LinkedList) Push(value string) {
+	newNode := &Node{value: value}
+	if ll.length == 0 {
+		ll.head = newNode
+		ll.tail = newNode
+	} else {
+		ll.tail.nextNode = newNode
+		ll.tail = newNode
+	}
+	ll.length++
 }
 
 func (ll *LinkedList) Pop() string {
@@ -73,4 +74,29 @@ func (ll *LinkedList) Pop() string {
 	ll.length--
 
 	return value
+}
+
+func (ll *LinkedList) Unshift(value string) {
+	newNode := &Node{value: value}
+	if ll.length == 0 {
+		ll.head = newNode
+		ll.tail = newNode
+	} else {
+		newNode.nextNode = ll.head
+		ll.head = newNode
+	}
+	ll.length++
+}
+
+func (ll *LinkedList) Shift() string {
+	if ll.length == 0 {
+		return ""
+	}
+
+	tmp := ll.head
+	ll.head = ll.head.nextNode
+	tmp.nextNode = nil
+	ll.length--
+
+	return tmp.value
 }
