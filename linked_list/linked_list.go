@@ -100,3 +100,31 @@ func (ll *LinkedList) Shift() string {
 
 	return tmp.value
 }
+
+func (ll *LinkedList) Get(index int) string {
+	if index < 0 || index >= ll.length {
+		return ""
+	}
+
+	currentNode := ll.head
+	for i := 0; i < index; i++ {
+		currentNode = currentNode.nextNode
+	}
+
+	return currentNode.value
+}
+
+func (ll *LinkedList) Set(index int, value string) bool {
+	if index < 0 || index >= ll.length {
+		return false
+	}
+
+	currentNode := ll.head
+	for i := 0; i < index; i++ {
+		currentNode = currentNode.nextNode
+	}
+
+	currentNode.value = value
+
+	return true
+}
