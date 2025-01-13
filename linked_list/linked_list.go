@@ -128,3 +128,56 @@ func (ll *LinkedList) Set(index int, value string) bool {
 
 	return true
 }
+
+func (ll *LinkedList) Insert(index int, value string) bool {
+	if index < 0 || index > ll.length {
+		return false
+	}
+
+	if index == 0 {
+		ll.Unshift(value)
+		return true
+	}
+
+	if index == ll.length {
+		ll.Push(value)
+		return true
+	}
+
+	newNode := &Node{value: value}
+	currentNode := ll.head
+	for i := 0; i < index-1; i++ {
+		currentNode = currentNode.nextNode
+	}
+
+	newNode.nextNode = currentNode.nextNode
+	currentNode.nextNode = newNode
+	ll.length++
+
+	return true
+}
+
+func (ll *LinkedList) Delete(index int) string {
+	if index < 0 || index >= ll.length {
+		return ""
+	}
+
+	if index == 0 {
+		return ll.Shift()
+	}
+
+	if index == ll.length-1 {
+		return ll.Pop()
+	}
+
+	currentNode := ll.head
+	for i := 0; i < index-1; i++ {
+		currentNode = currentNode.nextNode
+	}
+
+	value := currentNode.nextNode.value
+	currentNode.nextNode = currentNode.nextNode.nextNode
+	ll.length--
+
+	return value
+}
