@@ -202,6 +202,43 @@ func TestDelete(t *testing.T) {
 	})
 }
 
+func TestReverse(t *testing.T) {
+	ll := setupLinkedList()
+
+	ll.Reverse()
+
+	want := "D -> C -> B -> A"
+	got := ll.Print()
+
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
+}
+
+func TestFindMiddleNodeValue(t *testing.T) {
+	ll := setupLinkedList()
+
+	t.Run("Returns the middle node", func(t *testing.T) {
+		want := "C"
+		got := ll.FindMiddleNodeValue()
+
+		if got != want {
+			t.Errorf("got %q, want %q", got, want)
+		}
+	})
+
+	t.Run("Returns the middle node when the length is even", func(t *testing.T) {
+		ll.Push("E")
+
+		want := "C"
+		got := ll.FindMiddleNodeValue()
+
+		if got != want {
+			t.Errorf("got %q, want %q", got, want)
+		}
+	})
+}
+
 func setupLinkedList() *LinkedList {
 	ll := NewLinkedList("A")
 	ll.Push("B")

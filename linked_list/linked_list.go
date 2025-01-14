@@ -181,3 +181,38 @@ func (ll *LinkedList) Delete(index int) string {
 
 	return value
 }
+
+func (ll *LinkedList) Reverse() {
+	if ll.length == 0 {
+		return
+	}
+
+	currentNode := ll.head
+	ll.head = ll.tail
+	ll.tail = currentNode
+
+	var prevNode *Node
+	var nextNode *Node
+	for i := 0; i < ll.length; i++ {
+		nextNode = currentNode.nextNode
+		currentNode.nextNode = prevNode
+		prevNode = currentNode
+		currentNode = nextNode
+	}
+}
+
+func (ll *LinkedList) FindMiddleNodeValue() string {
+	if ll.length == 0 {
+		return ""
+	}
+
+	slowPointer := ll.head
+	fastPointer := ll.head
+
+	for fastPointer != nil && fastPointer.nextNode != nil {
+		slowPointer = slowPointer.nextNode
+		fastPointer = fastPointer.nextNode.nextNode
+	}
+
+	return slowPointer.value
+}
