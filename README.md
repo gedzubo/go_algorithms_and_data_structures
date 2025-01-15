@@ -1,1 +1,2 @@
-# go_algorithms_and_data_structures
+# Go algorithms and data structures
+
