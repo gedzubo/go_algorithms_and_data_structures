@@ -37,6 +37,18 @@ func (dll *DoublyLinkedList) Print() string {
 	return strings.Join(list, " -> ")
 }
 
+func (dll *DoublyLinkedList) PrintInReverse() string {
+	var list []string
+
+	currentNode := dll.tail
+	for currentNode != nil {
+		list = append(list, currentNode.value)
+		currentNode = currentNode.previousNode
+	}
+
+	return strings.Join(list, " -> ")
+}
+
 func (dll *DoublyLinkedList) Push(value string) {
 	newNode := &Node{value: value}
 	if dll.length == 0 {
