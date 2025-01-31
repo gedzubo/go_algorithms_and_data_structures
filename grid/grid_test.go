@@ -51,3 +51,29 @@ func TestGet(t *testing.T) {
 		}
 	})
 }
+
+func TestFillRow(t *testing.T) {
+	g := NewGrid(2, 2)
+	g.FillRow(0, "A")
+	g.FillRow(1, "B")
+
+	want := "A A \nB B \n"
+	got := g.Print()
+
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
+}
+
+func TestFillColumn(t *testing.T) {
+	g := NewGrid(2, 2)
+	g.FillColumn(0, "A")
+	g.FillColumn(1, "B")
+
+	want := "A B \nA B \n"
+	got := g.Print()
+
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
+}

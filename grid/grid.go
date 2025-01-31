@@ -42,3 +42,15 @@ func (g *Grid) Print() string {
 	}
 	return result
 }
+
+func (g *Grid) FillRow(row int, value string) {
+	for i := 0; i < g.columns; i++ {
+		g.Set(row, i, value)
+	}
+}
+
+func (g *Grid) FillColumn(column int, value string) {
+	for i := 0; i < g.rows; i++ {
+		g.Set(i, column, value)
+	}
+}
