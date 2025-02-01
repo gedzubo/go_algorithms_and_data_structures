@@ -77,3 +77,75 @@ func TestFillColumn(t *testing.T) {
 		t.Errorf("got %q, want %q", got, want)
 	}
 }
+
+func TestFillAll(t *testing.T) {
+	g := NewGrid(2, 2)
+	g.FillAll("A")
+
+	want := "A A \nA A \n"
+	got := g.Print()
+
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
+}
+
+func TestFillDiagonal(t *testing.T) {
+	g := NewGrid(2, 2)
+	g.FillDiagonal("A")
+
+	want := "A  \n A \n"
+	got := g.Print()
+
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
+}
+
+func TestFillReverseDiagonal(t *testing.T) {
+	g := NewGrid(2, 2)
+	g.FillReverseDiagonal("A")
+
+	want := " A \nA  \n"
+	got := g.Print()
+
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
+}
+
+func TestFillBorder(t *testing.T) {
+	g := NewGrid(3, 3)
+	g.FillAll("A")
+	g.FillBorder("B")
+
+	want := "B B B \nB A B \nB B B \n"
+	got := g.Print()
+
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
+}
+
+func TestCheckIfValueIsPresent(t *testing.T) {
+	g := NewGrid(3, 3)
+	g.FillAll("A")
+
+	t.Run("Returns true if value is present", func(t *testing.T) {
+		want := true
+		got := g.CheckIfValueIsPresent("A")
+
+		if got != want {
+			t.Errorf("got %t, want %t", got, want)
+		}
+	})
+
+	t.Run("Returns false if value is not present", func(t *testing.T) {
+		want := false
+		got := g.CheckIfValueIsPresent("B")
+
+		if got != want {
+			t.Errorf("got %t, want %t", got, want)
+		}
+	})
+}
