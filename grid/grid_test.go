@@ -149,3 +149,49 @@ func TestCheckIfValueIsPresent(t *testing.T) {
 		}
 	})
 }
+
+func CheckIfValueIsPresentInRow(t *testing.T) {
+	g := NewGrid(3, 3)
+	g.FillAll("A")
+
+	t.Run("Returns true if value is present in row", func(t *testing.T) {
+		want := true
+		got := g.CheckIfValueIsPresentInRow(1, "A")
+
+		if got != want {
+			t.Errorf("got %t, want %t", got, want)
+		}
+	})
+
+	t.Run("Returns false if value is not present in row", func(t *testing.T) {
+		want := false
+		got := g.CheckIfValueIsPresentInRow(1, "B")
+
+		if got != want {
+			t.Errorf("got %t, want %t", got, want)
+		}
+	})
+}
+
+func TestCheckIfValueIsPresentInColumn(t *testing.T) {
+	g := NewGrid(3, 3)
+	g.FillAll("A")
+
+	t.Run("Returns true if value is present in column", func(t *testing.T) {
+		want := true
+		got := g.CheckIfValueIsPresentInColumn(1, "A")
+
+		if got != want {
+			t.Errorf("got %t, want %t", got, want)
+		}
+	})
+
+	t.Run("Returns false if value is not present in column", func(t *testing.T) {
+		want := false
+		got := g.CheckIfValueIsPresentInColumn(1, "B")
+
+		if got != want {
+			t.Errorf("got %t, want %t", got, want)
+		}
+	})
+}

@@ -90,3 +90,21 @@ func (g *Grid) CheckIfValueIsPresent(value string) bool {
 	}
 	return false
 }
+
+func (g *Grid) CheckIfValueIsPresentInRow(row int, value string) bool {
+	for i := 0; i < g.columns; i++ {
+		if g.Get(row, i) == value {
+			return true
+		}
+	}
+	return false
+}
+
+func (g *Grid) CheckIfValueIsPresentInColumn(column int, value string) bool {
+	for i := 0; i < g.rows; i++ {
+		if g.Get(i, column) == value {
+			return true
+		}
+	}
+	return false
+}
